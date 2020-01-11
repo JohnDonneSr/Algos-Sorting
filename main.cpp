@@ -20,9 +20,14 @@ int main()
 	ArrayType arTmp = Array;
 	//std::list<int> List = { 45, 4551, 354, 589, 6747, 15 };
 
-	SortingSTL<ArrayIterator> sortSTLVec;
+	//SortingSTL<ArrayIterator> sortSTLVec;
+	SortingSTL sortSTLVec;
 
-	sortSTLVec.SortWithMeasurements(arTmp.begin(), arTmp.end());
+	sortSTLVec.SortWithMeasurements(arTmp);
+
+	SortingHeap sortHeap;
+	arTmp = Array;
+	sortHeap.SortWithMeasurements(arTmp);
 
 }
 
