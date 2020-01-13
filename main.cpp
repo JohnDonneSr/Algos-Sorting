@@ -4,9 +4,12 @@
 #include "pch.h"
 #include <iostream>
 #include <vector>
+#include <map>
+
 #include <list>
 
 #include "Sorting.h"
+#include "Solution.h"
 
 using namespace std;
 
@@ -16,8 +19,17 @@ typedef vector<int>			  ArrayType;
 
 int main()
 {
-	const ArrayType Array = { 45, 1, 34, 5, 97, 15 };
-	ArrayType arTmp = Array;
+	vector<int> vecSol = { 3,2,4 };
+
+	Solution sol;
+
+	sol.twoSum(vecSol, 6);
+
+	//**************************************************************************
+	//								Sorting
+	//**************************************************************************
+	const ArrayType arOrig = { 45, 1, 34, 5, 97, 15,  4551, 354, 589, 6747, 65, 74, 367, 189, 675, 98, 53, 974, 36};
+	ArrayType arTmp = arOrig;
 	//std::list<int> List = { 45, 4551, 354, 589, 6747, 15 };
 
 	SortingSTL<ArrayIterator> sortSTLVec;

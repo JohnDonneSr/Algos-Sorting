@@ -1,4 +1,5 @@
 #pragma once
+
 #include <algorithm>
 #include <string>
 #include <iostream>
@@ -59,6 +60,25 @@ public:
 	SortingInsertion() : Sorting<Iterator>("Insertion") {}
 	void Sort(Iterator start, Iterator end)
 	{
+
+	}
+};
+
+template <typename Iterator> class SortingHeap : public Sorting<Iterator>
+{
+public:
+	SortingHeap() : Sorting<Iterator>("Heap Sort") {}
+	void Sort(Iterator start, Iterator end)
+	{
+
+	}
+protected:
+	void Heapify(Iterator first, Iterator last)
+	{
+		while (first != last)
+		{
+
+		}
 
 	}
 };
