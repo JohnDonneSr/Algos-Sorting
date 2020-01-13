@@ -8,8 +8,15 @@
 
 using namespace std;
 
-
-template <typename Iterator> void Sorting<Iterator>::Sort(Iterator start, Iterator end)
+//template <typename Iterator> void Sorting<Iterator>::Dump(Iterator start, Iterator end)
+void Sorting::Dump(ArrayType& ar)
 {
-	//std::sort(start, end);
+	cout << "Array: ";
+	ArrayType::iterator it = ar.begin();
+	while (it != ar.end())
+	{
+		cout << *(it++) << " ";
+	}
+	cout << endl;
 }
+

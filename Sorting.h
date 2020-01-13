@@ -2,13 +2,17 @@
 
 #include <algorithm>
 #include <string>
+#include <vector>
 #include <iostream>
 
 using namespace std;
 
-template <typename Iterator> class Sorting
+typedef vector<int> ArrayType;
+
+//template <typename Iterator> class Sorting
+class Sorting
 {
-private:
+protected:
 	std::string m_strAlgoName;
 protected:
 	void StartMeasurement() {}
@@ -17,43 +21,37 @@ protected:
 public:
 	Sorting(const std::string& strAlgo) : m_strAlgoName(strAlgo){}
 
-	virtual void Sort(Iterator start, Iterator end) = 0;
+	//virtual void Sort(Iterator start, Iterator end) = 0;
+	virtual void Sort(ArrayType& ar) = 0;
 	
-	void Dump(Iterator start, Iterator end);
-	void SortWithMeasurements(Iterator start, Iterator end)
+	void Dump(ArrayType& ar);
+
+	void SortWithMeasurements(ArrayType& ar)
 	{
 		cout << "****** Sorting Algorithm '" << m_strAlgoName << "' ******" << endl << "Before: ";
-		Dump(start, end);
+		Dump(ar);
 		
-		Sort(start, end);
+		Sort(ar);
 
 		cout << "After: ";
-		Dump(start, end);
+		Dump(ar);
 	}
 };
 
-template <typename Iterator> void Sorting<Iterator>::Dump(Iterator start, Iterator end)
-{
-	cout << "Array: ";
-	while (start != end)
-	{
-		cout << *(start++) << " ";
-	}
-	cout << endl;
-}
 
 // STL itrosort algorithm O (N log (N))
-template <typename Iterator> class SortingSTL : public Sorting<Iterator>
+//template <typename Iterator> class SortingSTL : public Sorting<Iterator>
+class SortingSTL : public Sorting
 {
 public:
-	SortingSTL() : Sorting<Iterator>("STL (introsort)") {}
-	void Sort(Iterator start, Iterator end)
+	SortingSTL() : Sorting("STL (introsort)") {}
+	void Sort(ArrayType& ar)
 	{
-		std::sort(start, end);
+		std::sort(ar.begin(), ar.end());
 	}
 };
 
-
+/*
 template <typename Iterator> class SortingInsertion : public Sorting<Iterator>
 {
 public:
@@ -63,22 +61,42 @@ public:
 
 	}
 };
-
-template <typename Iterator> class SortingHeap : public Sorting<Iterator>
+*/
+class SortingHeap : public Sorting
 {
 public:
-	SortingHeap() : Sorting<Iterator>("Heap Sort") {}
-	void Sort(Iterator start, Iterator end)
+	SortingHeap() : Sorting("Heap") {}
+
+	void Sort(ArrayType& ar)
 	{
+		BuildHeap(ar);
+		
+		Dump(ar);
+
+		for (int i = ar.size() - 1; i > 0; i--)
+		{
+			int iTmp = ar[i];
+			ar[i] = ar[0];
+			ar[0] = iTmp;
+			Heapify(ar, 0, i);
+		}
 
 	}
-protected:
-	void Heapify(Iterator first, Iterator last)
-	{
-		while (first != last)
-		{
 
-		}
+	void BuildHeap(vector<int>& ar)
+	{
+		int iSize = ar.size();
+		for (int i = iSize; i >= 0; i--)
+			Heapify(ar, i, iSize);
+
+	}
+
+template <typename Iterator> class SortingInsertion : public Sorting<Iterator>
+{
+public:
+	SortingInsertion() : Sorting<Iterator>("Insertion") {}
+	void Sort(Iterator start, Iterator end)
+	{
 
 	}
 };
