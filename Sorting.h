@@ -70,7 +70,7 @@ public:
 	void Sort(ArrayType& ar)
 	{
 		BuildHeap(ar);
-		
+
 		Dump(ar);
 
 		for (int i = ar.size() - 1; i > 0; i--)
@@ -91,12 +91,27 @@ public:
 
 	}
 
-template <typename Iterator> class SortingInsertion : public Sorting<Iterator>
-{
-public:
-	SortingInsertion() : Sorting<Iterator>("Insertion") {}
-	void Sort(Iterator start, Iterator end)
+	void Heapify(vector<int>& ar, int idxCur, int idxMax)
 	{
+		int idxLeft = 2 * idxCur + 1;
+		int idxRight = 2 * idxCur + 2;
 
+		int idxLargest = idxCur;
+
+		if (idxLeft < idxMax && ar[idxCur] < ar[idxLeft])
+			idxLargest = idxLeft;
+
+		if (idxRight < idxMax && ar[idxLargest] < ar[idxRight])
+			idxLargest = idxRight;
+
+		if (idxLargest != idxCur)
+		{
+			int tmp = ar[idxCur];
+			ar[idxCur] = ar[idxLargest];
+			ar[idxLargest] = tmp;
+
+			Heapify(ar, idxLargest, idxMax);
+		}
 	}
 };
+
