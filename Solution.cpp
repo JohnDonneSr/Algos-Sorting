@@ -77,3 +77,86 @@ vector<int> Solution::twoSum(vector<int>& nums, int target)
 
 	return result;
 }
+
+
+ListNode* Solution::addTwoNumbers(ListNode* l1, ListNode* l2)
+{
+	
+	ListNode *lRes = new ListNode(0);
+	ListNode *it1 = l1, *it2 = l2, *itSum = lRes;
+
+	//Helpers
+	int iTrans = 0, iSum = 0;
+
+	while (it1 || it2 || iTrans)
+	{
+		iSum = iTrans;
+
+		if (it1)
+			iSum += it1->val;
+		if (it2)
+			iSum += it2->val;
+
+		if (iSum >= 10)
+		{
+			itSum->val = iSum % 10;
+			iTrans = 1;
+		}
+		else
+		{
+			itSum->val = iSum;
+			iTrans = 0;
+		}
+
+
+		if (it1)
+			it1 = it1->next;
+
+		if (it2)
+			it2 = it2->next;
+
+		if (it1 || it2 || iTrans)
+		{
+			itSum = itSum->next = new ListNode(0);
+		}
+
+	}
+
+	/*
+	//Bad solution
+	unsigned long u1 = 0, u2 = 0;
+	int i = 1;
+
+	while (l1 || l2)
+	{
+		if (l1)
+			u1 += l1->val * i;
+		if (l2)
+			u2 += l2->val * i;
+
+		i *= 10;
+
+		l1 = l1->next;
+		l2 = l2->next;
+	}
+
+	unsigned long uRes = u1 + u2;
+
+	cout << "uRes = " << uRes << endl;
+
+	ListNode *lRes = new ListNode(uRes % 10), *it = lRes;
+	//lRes->val = uRes % 10;
+
+	do
+	{
+		cout << "lRes->val = " << it->val << endl;
+
+		uRes = (uRes - it->val) / 10;
+		if (uRes > 0)
+			it->next = new ListNode(uRes % 10);
+	} while (it = it->next);
+	*/
+
+	return lRes;
+
+}

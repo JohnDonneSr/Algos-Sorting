@@ -25,6 +25,25 @@ int main()
 
 	sol.twoSum(vecSol, 6);
 
+	cout << "\n Add two numbers problem \n";
+    //Input: (2 -> 4 -> 3) + (5 -> 6 -> 4)
+	ListNode *l1 = new ListNode(2);
+	l1->next = new ListNode(4);
+	l1->next->next = new ListNode(3);
+
+	ListNode *l2 = new ListNode(5);
+	l2->next = new ListNode(6);
+	l2->next->next = new ListNode(4);
+
+	ListNode *lRes = sol.addTwoNumbers(l1, l2);
+
+	while(lRes)
+	{ 
+		cout << lRes->val << (lRes->next != NULL ? " -> ": "");
+		lRes = lRes->next;
+	}
+	cout << "\n\n";
+
 	//**************************************************************************
 	//								Sorting
 	//**************************************************************************
